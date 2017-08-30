@@ -1,4 +1,4 @@
-﻿//Base code from workshop 4. Added update and rotation.
+//Base code from workshop 4. Added update and rotation.
 using UnityEngine;
 using System.Collections;
 
@@ -18,6 +18,8 @@ public class PointLight : MonoBehaviour {
     {
         //Time.deltaTime gets the time between frames
         rotation = Time.deltaTime *multiplier; //The greater the number the faster the speed.
-        transform.RotateAround(Vector3.zero, new Vector3(1,0,0),rotation);
+        //Vector3.right is the same as new Vector3(1,0,0) (x axis is constant, sun rotates around z and y).
+        transform.RotateAround(Vector3.zero, Vector3.right,rotation);
+        transform.LookAt(Vector3.zero);// transform at every frame to ensure light is looking at (0,0,0)
     }
 }
