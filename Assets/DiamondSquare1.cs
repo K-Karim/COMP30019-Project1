@@ -28,12 +28,12 @@ public class DiamondSquare1 : MonoBehaviour {
 
 		Random.InitState(seed);
 
-		MeshFilter planeMesh = this.gameObject.AddComponent<MeshFilter>();
+		MeshFilter planeMesh = this.gameObject.GetComponent<MeshFilter>();
 		planeMesh.mesh = this.CreateTerrain();
 
 		// Add a MeshRenderer component. This component actually renders the mesh that
 		// is defined by the MeshFilter component.
-		MeshRenderer renderer = this.gameObject.AddComponent<MeshRenderer>();
+		MeshRenderer renderer = this.gameObject.GetComponent<MeshRenderer>();
 		renderer.material.shader = shader;
 
 		Application.targetFrameRate = 30;
