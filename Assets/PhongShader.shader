@@ -75,7 +75,7 @@ Shader "Unlit/PhongShader"
 				// Transform vertex in world coordinates to camera coordinates, and pass colour
 				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
 				float4 colour;
-
+				//Colour based on height, White at the top, brown, green, yellow then blue for water :)
 				if( v.vertex.y  >= 20){
 					colour= float4(1, 1, 1, 1); // white
 				}
@@ -91,10 +91,8 @@ Shader "Unlit/PhongShader"
 					colour = float4(0, 0, 1, 1); // blue
 				}
 
-
+				// set vertex colour to the height calculated one
 				o.color= colour;
-
-//				o.color = v.color;
 
 				// Pass out the world vertex position and world normal to be interpolated
 				// in the fragment shader (and utilised)
@@ -125,9 +123,6 @@ Shader "Unlit/PhongShader"
 				float Ks = 1;
 				float specN = 5; // Values>>1 give tighter highlights
 				float3 V = normalize(_WorldSpaceCameraPos - v.worldVertex.xyz);
-				// Using classic reflection calculation:
-				//float3 R = normalize((2.0 * LdotN * interpNormal) - L);
-				//float3 spe = fAtt * _PointLightColor.rgb * Ks * pow(saturate(dot(V, R)), specN);
 				// Using Blinn-Phong approximation:
 				specN = 25; // We usually need a higher specular power when using Blinn-Phong
 				float3 H = normalize(V + L);
