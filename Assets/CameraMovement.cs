@@ -65,6 +65,8 @@ public class CameraMovement : MonoBehaviour {
 			rotZ += rollSpeed;
 		} else if (Input.GetKey (KeyCode.Q)) {
 			rotZ -= rollSpeed;
+		} else {
+			rotZ = Mathf.Lerp (0, 0, Time.deltaTime*decceleration);
 		}
 
 		Quaternion zQuat = Quaternion.AngleAxis (Time.deltaTime*rotZ, -Vector3.forward);

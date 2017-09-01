@@ -141,9 +141,9 @@ public class DiamondSquare1 : MonoBehaviour {
         /*MeshCollider meshc = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
         meshc.sharedMesh = mesh;
         GetComponent<MeshCollider>().sharedMesh = mesh;*/
-//        gameObject.AddComponent(typeof(MeshCollider));
-//        transform.gameObject.AddComponent<MeshCollider>();
-//        GetComponent<MeshCollider>().sharedMesh = mesh    ;
+        this.gameObject.AddComponent(typeof(MeshCollider));
+        transform.gameObject.AddComponent<MeshCollider>();
+        GetComponent<MeshCollider>().sharedMesh = mesh    ;
 
 		return mesh; 
     }
