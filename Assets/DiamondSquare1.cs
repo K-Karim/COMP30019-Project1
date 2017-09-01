@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿/*
+ * Graphics and Interaction (COMP30019) Project 1
+ * Team: Karim Khairat, Duy (Daniel) Vu, and Brody Taylor
+ * 
+ * Code adapted from other sources: https://www.youtube.com/watch?v=1HV8GbFnCik
+ * 
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,18 +24,15 @@ public class DiamondSquare1 : MonoBehaviour {
 
 	public int seed;
 
-
-
-
     Vector3[] mVerts;
     int mVertCount;
 
     void Start()
     {
-//        CreateTerrain();
-
+		// Set initial seed for random value
 		Random.InitState(seed);
 
+		// Create mesh object for terrain
 		MeshFilter planeMesh = this.gameObject.GetComponent<MeshFilter>();
 		planeMesh.mesh = this.CreateTerrain();
 
@@ -36,6 +41,7 @@ public class DiamondSquare1 : MonoBehaviour {
 		MeshRenderer renderer = this.gameObject.GetComponent<MeshRenderer>();
 		renderer.material.shader = shader;
 
+		// Set frame rate of application
 		Application.targetFrameRate = 30;
 
     }
@@ -43,17 +49,20 @@ public class DiamondSquare1 : MonoBehaviour {
 	// Called each frame
 	void Update()
 	{
+
+		// Update point light (sun)
 		pointLight.Update ();
 
 		// Get renderer component (in order to pass params to shader)
 		MeshRenderer renderer = this.gameObject.GetComponent<MeshRenderer>();
 
-
 		// Pass updated light positions to shader
 		renderer.material.SetColor("_PointLightColor", this.pointLight.color);
 		renderer.material.SetVector("_PointLightPosition", this.pointLight.GetWorldPosition());
 	}
-
+	/* 
+	 * Create terrain object as a mesh object
+	 */
 	Mesh CreateTerrain()
     {
 

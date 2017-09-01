@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿/*
+ * Graphics and Interaction (COMP30019) Project 1
+ * Team: Karim Khairat, Duy (Daniel) Vu, and Brody Taylor
+ * 
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -56,11 +62,12 @@ public class CameraMovement : MonoBehaviour {
 		forwardSpeed = Mathf.Clamp (forwardSpeed, -maxSpeed, maxSpeed);
 		sidewaysSpeed = Mathf.Clamp (sidewaysSpeed, -maxSpeed, maxSpeed);
 
+		//Apply position tranformations 
+		this.transform.localPosition += (this.transform.forward * forwardSpeed + this.transform.right * sidewaysSpeed) * Time.deltaTime;
 
+		// Rotational Movement Input
+		float rotZ=0f, rotY=0f, rotX=0f;
 
-		//Rotational Movement Input
-
-		float rotZ=0f;
 		if (Input.GetKey (KeyCode.E)) {
 			rotZ += rollSpeed;
 		} else if (Input.GetKey (KeyCode.Q)) {
@@ -71,23 +78,15 @@ public class CameraMovement : MonoBehaviour {
 
 		Quaternion zQuat = Quaternion.AngleAxis (Time.deltaTime*rotZ, -Vector3.forward);
 
-		//Apply tranformations 
-		this.transform.localPosition += (this.transform.forward * forwardSpeed + this.transform.right * sidewaysSpeed) * Time.deltaTime;
-		transform.localRotation *= zQuat;
-
-
-		float rotY=0f;
-		float rotX=0f;
-
-		//Mouse Look
+		// Mouse Look
 		rotX += Input.GetAxis("Mouse X") * 5f;
 		rotY += Input.GetAxis("Mouse Y") * 5f;
 
 		Quaternion xQuat = Quaternion.AngleAxis (rotX, Vector3.up);
 		Quaternion yQuat = Quaternion.AngleAxis (rotY, -Vector3.right);
 
-
-		//Apply tranformations 
+		//Apply rotation tranformations 
+		transform.localRotation *= zQuat;
 		transform.localRotation *= xQuat;
 		transform.localRotation *= yQuat;
 	}

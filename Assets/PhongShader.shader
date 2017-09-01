@@ -66,10 +66,10 @@ Shader "Unlit/PhongShader"
 			vertOut vert(vertIn v)
 			{
 				vertOut o;
-				int SNOW_H= 20;
-				int MOUNTAIN_H= 5;
-				int GRASS_H= 2;
-				int SAND_H= 1;
+				int SNOW_H= 20;			// Snow start height
+				int MOUNTAIN_H= 5;		// Mountain start height
+				int GRASS_H= 2;			// Grass start height
+				int SAND_H= 1;			// Sand start height
 				
 				// Convert Vertex position and corresponding normal into world coords.
 				// Note that we have to multiply the normal by the transposed inverse of the world 
@@ -81,7 +81,9 @@ Shader "Unlit/PhongShader"
 				// Transform vertex in world coordinates to camera coordinates, and pass colour
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				float4 colour;
-				//Colour based on height, White at the top, brown, green, yellow then blue for water :)
+
+				//Colour based on height.
+				//White at the top (snow), brown (mountain), green (grass), yellow (sand) then blue (water) :)
 				if( v.vertex.y  >= SNOW_H){
 					colour= float4(1, 1, 1, 1); // white
 				}

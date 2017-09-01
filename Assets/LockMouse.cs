@@ -1,5 +1,10 @@
-﻿//Code from https://docs.unity3d.com/ScriptReference/Cursor-lockState.html
-// Adapted for COMP30019 by Brody Taylor, Karim Khairat and Duy (Daniel) Vu
+﻿/*
+ * Graphics and Interaction (COMP30019) Project 1
+ * Team: Karim Khairat, Duy (Daniel) Vu, and Brody Taylor
+ * 
+ * Code adapted from https://docs.unity3d.com/ScriptReference/Cursor-lockState.html
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
