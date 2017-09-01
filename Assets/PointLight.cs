@@ -16,7 +16,7 @@ public class PointLight : MonoBehaviour {
     private float rotation; 
 
     // Multiplier value to modify rotation speed!
-    private static int multiplier = 20;
+    private static int multiplier = 10;
 
     public Vector3 GetWorldPosition()
     {
