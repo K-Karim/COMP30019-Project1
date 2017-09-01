@@ -1,0 +1,32 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/PhongShader.shader">
+    <Files>
+      <File FileName="Assets/PointLight.cs" Line="1" Column="1" />
+      <File FileName="Assets/CameraMovement.cs" Line="1" Column="1" />
+      <File FileName="Assets/DiamondSquare1.cs" Line="1" Column="1" />
+      <File FileName="Assets/LockMouse.cs" Line="1" Column="1" />
+      <File FileName="Assets/PhongShader.shader" Line="79" Column="28" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="COMP30019-Project1" expanded="True">
+            <Node name="Assembly-CSharp" expanded="True">
+              <Node name="PhongShader.shader" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.NUnit.TestPad">
+        <State name="__root__">
+          <Node name="COMP30019-Project1" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
