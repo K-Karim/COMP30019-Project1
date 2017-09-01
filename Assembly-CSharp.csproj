@@ -47,13 +47,10 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\CameraMovement.cs" />
-     <Compile Include="Assets\CubeScript.cs" />
      <Compile Include="Assets\DiamondSquare1.cs" />
      <Compile Include="Assets\LockMouse.cs" />
      <Compile Include="Assets\PointLight.cs" />
-     <Compile Include="Assets\YAxisSpin.cs" />
      <None Include="Assets\PhongShader.shader" />
-     <None Include="Assets\GouraudShader.shader" />
  <Reference Include="UnityEngine.Analytics">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
