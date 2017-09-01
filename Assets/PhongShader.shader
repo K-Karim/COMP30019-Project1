@@ -22,7 +22,7 @@
 // Adapted further by Chris Ewin, 23 Sep 2013
 // Adapted further (again) by Alex Zable (port to Unity), 19 Aug 2016
 
-//UNITY_SHADER_NO_UPGRADE
+// Adapted by Karim Khairat, Duy (Daniel) Vu, and Brody Taylor for COMP30019 Assignment 1.
 
 
 Shader "Unlit/PhongShader"
@@ -64,7 +64,11 @@ Shader "Unlit/PhongShader"
 			vertOut vert(vertIn v)
 			{
 				vertOut o;
-
+				private int SNOW_H= 20;
+				private int MOUNTAIN_H= 5;
+				private int GRASS_H= 2;
+				private int SAND_H= 1;
+				
 				// Convert Vertex position and corresponding normal into world coords.
 				// Note that we have to multiply the normal by the transposed inverse of the world 
 				// transformation matrix (for cases where we have non-uniform scaling; we also don't
@@ -76,16 +80,16 @@ Shader "Unlit/PhongShader"
 				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
 				float4 colour;
 				//Colour based on height, White at the top, brown, green, yellow then blue for water :)
-				if( v.vertex.y  >= 20){
+				if( v.vertex.y  >= SNOW_H){
 					colour= float4(1, 1, 1, 1); // white
 				}
-				else if( v.vertex.y  >= 5){
+				else if( v.vertex.y  >= MOUNTAIN_H){
 					colour= float4(0.4, 0.2, 0, 1); // brown
 				}
-				else if( v.vertex.y  >= 2){
+				else if( v.vertex.y  >= GRASS_H){
 					colour= float4(0, 1, 0, 1); // green
 				}
-				else if (v.vertex.y  >= 1) {
+				else if (v.vertex.y  >= SAND_H) {
 					colour = float4(1, 0.92, 0.016, 1); // yellow
 				} else {
 					colour = float4(0, 0, 1, 1); // blue
