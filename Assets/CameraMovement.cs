@@ -2,6 +2,7 @@
  * Graphics and Interaction (COMP30019) Project 1
  * Team: Karim Khairat, Duy (Daniel) Vu, and Brody Taylor
  * 
+ * Code Adapted from other sources: Workshop 2 solutions
  */
 
 using System.Collections;
@@ -14,16 +15,16 @@ public class CameraMovement : MonoBehaviour {
 	public float acceleration;
 	public float decceleration;
 	public float maxSpeed;
-	public bool constantSpeed;
 
 	//Rotation Settings
 	public float rollSpeed;
+	public float mouseSensitivityX;
+	public float mouseSensitivityY;
 
 	//Initial values
 	private float forwardSpeed = 0f;
 	private float sidewaysSpeed = 0f;
 
-	//private Quaternion origRotation;
 	private DiamondSquare1 planObject;
 
 	private Vector3 origPosition;
@@ -36,12 +37,6 @@ public class CameraMovement : MonoBehaviour {
 
 
 	void Start() {
-		//freeze rotation of rigidbody
-		/*
-		if(GetComponent<Rigidbody>())
-			GetComponent<Rigidbody>().freezeRotation = true;
-			*/
-		//origRotation = transform.localRotation;
 
 		// Set intial position
 		planObject = GameObject.Find ("Plane").GetComponent<DiamondSquare1>();
@@ -56,61 +51,15 @@ public class CameraMovement : MonoBehaviour {
 
 	}
 
-	//originally code from Workshop 2 solutions
 	void Update() {
 
-		//Positional Movement Input------------------------------CHANGE ARROWS TO WASD ------------------------------------\\
-		if (constantSpeed) {
-			forwardSpeed = 0f;
-			sidewaysSpeed = 0f;
-		}
+		//Applys position transformations based on user input
+		movement ();
 
-		if (Input.GetKey (KeyCode.W)) {
-			forwardSpeed += acceleration;
-		} else if (Input.GetKey (KeyCode.S)) {
-			forwardSpeed -= acceleration;
-		} else {
-			forwardSpeed = Mathf.Lerp (forwardSpeed, 0, Time.deltaTime*decceleration);
-		}
+		//Applys rotational tranformations based on user input
+		mouseLook ();
 
-		if (Input.GetKey (KeyCode.D)) {
-			sidewaysSpeed+= acceleration;
-		} else if (Input.GetKey (KeyCode.A)) {
-			sidewaysSpeed-= acceleration;
-		} else {
-			sidewaysSpeed = Mathf.Lerp (sidewaysSpeed, 0, Time.deltaTime*decceleration);
-		}
 
-		forwardSpeed = Mathf.Clamp (forwardSpeed, -maxSpeed, maxSpeed);
-		sidewaysSpeed = Mathf.Clamp (sidewaysSpeed, -maxSpeed, maxSpeed);
-
-		//Apply position tranformations 
-		this.transform.localPosition = bound( (this.transform.forward * forwardSpeed + this.transform.right * sidewaysSpeed) * Time.deltaTime);
-
-		// Rotational Movement Input
-		float rotZ=0f, rotY=0f, rotX=0f;
-
-		if (Input.GetKey (KeyCode.E)) {
-			rotZ += rollSpeed;
-		} else if (Input.GetKey (KeyCode.Q)) {
-			rotZ -= rollSpeed;
-		} else {
-			rotZ = Mathf.Lerp (0, 0, Time.deltaTime*decceleration);
-		}
-
-		Quaternion zQuat = Quaternion.AngleAxis (Time.deltaTime*rotZ, -Vector3.forward);
-
-		// Mouse Look
-		rotX += Input.GetAxis("Mouse X") * 5f;
-		rotY += Input.GetAxis("Mouse Y") * 5f;
-
-		Quaternion xQuat = Quaternion.AngleAxis (rotX, Vector3.up);
-		Quaternion yQuat = Quaternion.AngleAxis (rotY, -Vector3.right);
-
-		//Apply rotation tranformations 
-		transform.localRotation *= zQuat;
-		transform.localRotation *= xQuat;
-		transform.localRotation *= yQuat;
 	}
 
 
@@ -139,6 +88,58 @@ public class CameraMovement : MonoBehaviour {
 		}
 
 		return newPos;
+	}
+
+	//Movement based on user input
+	private void movement(){
+		//Gets forward movement based on user input
+		if (Input.GetKey (KeyCode.W)) {
+			forwardSpeed += acceleration;
+		} else if (Input.GetKey (KeyCode.S)) {
+			forwardSpeed -= acceleration;
+		} else {
+			//Linearly decelerates speed as no keys being pressed
+			forwardSpeed = Mathf.Lerp (forwardSpeed, 0, Time.deltaTime*decceleration);
+		}
+
+		//Gets sidesways movement bas
+		if (Input.GetKey (KeyCode.D)) {
+			sidewaysSpeed+= acceleration;
+		} else if (Input.GetKey (KeyCode.A)) {
+			sidewaysSpeed-= acceleration;
+		} else {
+			//Linearly decelerates speed
+			sidewaysSpeed = Mathf.Lerp (sidewaysSpeed, 0, Time.deltaTime*decceleration);
+		}
+
+		// Keeps speed within maximum defined limits
+		forwardSpeed = Mathf.Clamp (forwardSpeed, -maxSpeed, maxSpeed);
+		sidewaysSpeed = Mathf.Clamp (sidewaysSpeed, -maxSpeed, maxSpeed);
+
+		//Apply position tranformations 
+		this.transform.localPosition = bound( (this.transform.forward * forwardSpeed + this.transform.right * sidewaysSpeed) * Time.deltaTime);
+	}
+
+	//Rotations based on mouse and keyboard inputs
+	private void mouseLook(){
+		//Inital value
+		Quaternion rotation = Quaternion.identity;
+
+		// Roll
+		if (Input.GetKey (KeyCode.E)) {
+			rotation *= Quaternion.AngleAxis (-rollSpeed * Time.deltaTime, Vector3.forward);
+		} else if (Input.GetKey (KeyCode.Q)) {
+			rotation *= Quaternion.AngleAxis (rollSpeed * Time.deltaTime, Vector3.forward);
+		}
+
+		// Mouse Look
+		float rotX = Input.GetAxis("Mouse X")*mouseSensitivityX;
+		float rotY = Input.GetAxis("Mouse Y")*mouseSensitivityY;
+		rotation *= Quaternion.AngleAxis (rotX, Vector3.up);
+		rotation *= Quaternion.AngleAxis (rotY, -Vector3.right);
+
+		//Apply rotation tranformations 
+		transform.rotation *= rotation;
 	}
 
 }
