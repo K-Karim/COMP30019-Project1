@@ -22,7 +22,18 @@ public class CameraMovement : MonoBehaviour {
 	//Initial values
 	private float forwardSpeed = 0f;
 	private float sidewaysSpeed = 0f;
-	private Quaternion origRotation;
+
+	//private Quaternion origRotation;
+	private DiamondSquare1 planObject;
+
+	private Vector3 origPosition;
+
+	private float gap = 1f;
+	float skyBound;
+	float boundSize;
+
+
+
 
 	void Start() {
 		//freeze rotation of rigidbody
@@ -30,8 +41,19 @@ public class CameraMovement : MonoBehaviour {
 		if(GetComponent<Rigidbody>())
 			GetComponent<Rigidbody>().freezeRotation = true;
 			*/
+		//origRotation = transform.localRotation;
 
-		origRotation = transform.localRotation;
+		// Set intial position
+		planObject = GameObject.Find ("Plane").GetComponent<DiamondSquare1>();
+		origPosition = new Vector3(-planObject.mSize/2 ,planObject.mHeight+ planObject.mHeight/10, -planObject.mSize/2); 
+		transform.localPosition = origPosition;
+
+		// Set boundaries:
+		this.boundSize = planObject.mSize / 2;
+		this.skyBound = planObject.mHeight + planObject.mHeight/5;
+
+
+
 	}
 
 	//originally code from Workshop 2 solutions
@@ -63,7 +85,7 @@ public class CameraMovement : MonoBehaviour {
 		sidewaysSpeed = Mathf.Clamp (sidewaysSpeed, -maxSpeed, maxSpeed);
 
 		//Apply position tranformations 
-		this.transform.localPosition += (this.transform.forward * forwardSpeed + this.transform.right * sidewaysSpeed) * Time.deltaTime;
+		this.transform.localPosition = bound( (this.transform.forward * forwardSpeed + this.transform.right * sidewaysSpeed) * Time.deltaTime);
 
 		// Rotational Movement Input
 		float rotZ=0f, rotY=0f, rotX=0f;
@@ -90,4 +112,33 @@ public class CameraMovement : MonoBehaviour {
 		transform.localRotation *= xQuat;
 		transform.localRotation *= yQuat;
 	}
+
+
+	// Project new position of camera by the movement 'movePos' and restrain within bound
+	private Vector3 bound(Vector3 movePos) {
+		// new position of camera after the move
+		Vector3 newPos = movePos + gameObject.transform.localPosition;
+
+		// Keep the camera inside the terrain's bounds
+		if (newPos.x < -boundSize + gap) {
+			newPos.x = -boundSize + gap;
+		}
+		if (newPos.z < -boundSize + gap) {
+			newPos.z = -boundSize + gap;
+		}
+		if (newPos.x > boundSize - gap) {
+			newPos.x = boundSize - gap;
+		}
+		if (newPos.z > boundSize - gap) {
+			newPos.z = boundSize - gap;
+		}
+
+		// Keep the camera below sky bound
+		if (newPos.y > skyBound - gap) {
+			newPos.y = skyBound - gap;	
+		}
+
+		return newPos;
+	}
+
 }
