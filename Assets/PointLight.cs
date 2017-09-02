@@ -23,6 +23,13 @@ public class PointLight : MonoBehaviour {
         return this.transform.position;
     }
 
+	void Start()
+	{
+		// Set initial rotation radius
+		DiamondSquare1 planObject = GameObject.Find ("Plane").GetComponent<DiamondSquare1>();
+		gameObject.transform.position = new Vector3(0, planObject.mSize/2, -planObject.mSize/2);
+	}
+
     //update this every frame
    public void Update()
     {
