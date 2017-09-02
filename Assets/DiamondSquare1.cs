@@ -12,9 +12,9 @@ using UnityEngine;
 
 public class DiamondSquare1 : MonoBehaviour {
 
-    public int mDivisions;
-    public float mSize;
-    public float mHeight;
+    public int mDivisions = 128;
+	public float mSize = 200;
+    public float mHeight = 50;
 
 	public float roughness = 0.4f;
 	float minHeight = 0f;
@@ -40,6 +40,12 @@ public class DiamondSquare1 : MonoBehaviour {
 		// is defined by the MeshFilter component.
 		MeshRenderer renderer = this.gameObject.GetComponent<MeshRenderer>();
 		renderer.material.shader = shader;
+
+
+		// Add MeshCollider for mesh object to avoid camera object
+		this.gameObject.AddComponent(typeof(MeshCollider));
+		transform.gameObject.AddComponent<MeshCollider>();
+		GetComponent<MeshCollider>().sharedMesh = planeMesh.mesh;
 
 		// Set frame rate of application
 		Application.targetFrameRate = 30;
@@ -147,12 +153,7 @@ public class DiamondSquare1 : MonoBehaviour {
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
 
-        /*MeshCollider meshc = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
-        meshc.sharedMesh = mesh;
-        GetComponent<MeshCollider>().sharedMesh = mesh;*/
-        this.gameObject.AddComponent(typeof(MeshCollider));
-        transform.gameObject.AddComponent<MeshCollider>();
-        GetComponent<MeshCollider>().sharedMesh = mesh    ;
+ 
 
 		return mesh; 
     }
@@ -172,5 +173,6 @@ public class DiamondSquare1 : MonoBehaviour {
 		mVerts[mid + halfSize].y = Mathf.Max((mVerts[topLeft + size].y + mVerts[botLeft + size].y + mVerts[mid].y) / 3 + Random.Range(-offset, offset),0);
 		mVerts[botLeft + halfSize].y = Mathf.Max((mVerts[botLeft].y + mVerts[botLeft + size].y + mVerts[mid].y) / 3 + Random.Range(-offset, offset),0);
     }
+
 		
 }
