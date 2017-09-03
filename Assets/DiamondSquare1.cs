@@ -16,8 +16,8 @@ public class DiamondSquare1 : MonoBehaviour {
     public int mDivisions = 128;    // maximum number of faces (or lines) on one dimension: has to be 2^n
 	public float mSize = 200;       // maximum size of terrain
     public float mHeight = 50;      // maximum height of terrain
-	public float roughness = 0.4f;  // rate of change of height for every iteration of the Diamond-Square algorithm */
-	public int seed= 50;
+	public float roughness = 0.4f;  // rate of change of height for every iteration of the Diamond-Square algorithm
+	public int seed= 50;			// seed for random value
 
 	public PointLight pointLight;
 	public Shader shader;
