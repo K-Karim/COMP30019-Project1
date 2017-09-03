@@ -2,6 +2,7 @@
  * Graphics and Interaction (COMP30019) Project 1
  * Team: Karim Khairat, Duy (Daniel) Vu, and Brody Taylor
  *
+ * Class is used to create a terrain as a mesh object with the Diamond-Square Algorithm
  * Code adapted from other sources: https://www.youtube.com/watch?v=1HV8GbFnCik
  *
  */
@@ -12,11 +13,11 @@ using UnityEngine;
 
 public class DiamondSquare1 : MonoBehaviour {
 
-    public int mDivisions = 128;    // maximum number of faces (or lines) on one dimension
+    public int mDivisions = 128;    // maximum number of faces (or lines) on one dimension: has to be 2^n
 	public float mSize = 200;       // maximum size of terrain
     public float mHeight = 50;      // maximum height of terrain
 	public float roughness = 0.4f;  // rate of change of height for every iteration of the Diamond-Square algorithm */
-	public int seed;
+	public int seed= 50;
 
 	public PointLight pointLight;
 	public Shader shader;
@@ -111,7 +112,7 @@ public class DiamondSquare1 : MonoBehaviour {
 				{
 					/* At each vertex (except those positioned at row (or col) = mDivisions), draw 2 triangles to represent a square.
 					* Square contains 4 vertices, top left & right, bottom left & right.
-					* Index of Top left and Bottom left vertices of the current square/ face are: */
+					* Index of Top left and Bottom left vertices of the current square (face) are: */
                     int topLeft = i * (mDivisions + 1) + j;
                     int botLeft = (i + 1) * (mDivisions + 1) + j;
 
@@ -142,7 +143,7 @@ public class DiamondSquare1 : MonoBehaviour {
 
 		/* Diamond-Square Algorithms */
 		int iterations = (int)Mathf.Log(mDivisions, 2); 	// total number of iteration to run (Diamond-Square) pairs
-		int numSquares = 1;		// number of squares in the iteration (first iteration has 1 big square)
+		int numSquares = 1;				// number of squares in the iteration (first iteration has 1 big square)
 		int squareSize = mDivisions;	// size of the square in the iteration (first iteration uses smallest squares)
 
 		for (int i = 0; i < iterations; i++)
@@ -180,7 +181,7 @@ public class DiamondSquare1 : MonoBehaviour {
 
 
 	/// <summary>
-	///
+	///		Perform Diamond step and Square step in one square
 	/// </summary>
 	/// <param name="row"> row the square at</param>
 	/// <param name="col"> column the square at </param>
