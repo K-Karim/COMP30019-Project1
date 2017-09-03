@@ -36,7 +36,8 @@ public class PointLight : MonoBehaviour {
 	/// <summary>
 	///		Perform Rotation and keep the sun facing the origin
 	/// </summary>
-    {
+	public void Update()
+    	{
         // Time.deltaTime gets the time between frames
         rotation = Time.deltaTime * multiplier; //The greater the multiplier the faster the speed.
 
@@ -45,5 +46,5 @@ public class PointLight : MonoBehaviour {
 
 	// Transform at every frame to ensure light is looking at (0,0,0)
         transform.LookAt(Vector3.zero);
-    }
+    	}
 }
