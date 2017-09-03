@@ -35,6 +35,9 @@ public class DiamondSquare1 : MonoBehaviour {
 		// Set initial seed for random value
 		Random.InitState(seed);
 
+		// Set middle point of the terrain to be at (0,0,0)
+		gameObject.transform.position = new Vector3 (0, 0, 0);
+
 		// Create mesh object for terrain
 		MeshFilter planeMesh = this.gameObject.GetComponent<MeshFilter>();
 		planeMesh.mesh = this.CreateTerrain();
