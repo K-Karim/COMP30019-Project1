@@ -3,8 +3,10 @@ Implementation:
 Class is used to create a terrain as a mesh object with the Diamond-Square Algorithm
 
 2. CameraMovement.cs
+Class dictates the cameras movement and rotation through input keys and mouse movement. All rotation and movement is done relative to the cameras orientation.
 
 3. LockMouse.cs
+Stops mouse from moving outside of playarea and prevents rotation from being hindered by displays borders. Can be unlocked using the 'esc' key and locked again by clicking on the screen.
 
 4. PointLight.cs
 Adapted from Lab04 to allow for rotation. This deals with the sun's movement and light source

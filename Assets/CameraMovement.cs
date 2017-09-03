@@ -67,7 +67,9 @@ public class CameraMovement : MonoBehaviour {
 	}
 
 
-	// Project new position of camera by the movement 'movePos' and restrain within bound
+	/// <summary>
+	///		Project new position of camera by the movement 'movePos' and restrain within bound
+	/// </summary>
 	private Vector3 bound(Vector3 movePos) {
 		// new position of camera after the move
 		Vector3 newPos = movePos + gameObject.transform.localPosition;
@@ -94,7 +96,9 @@ public class CameraMovement : MonoBehaviour {
 		return newPos;
 	}
 
-	//Movement based on user input
+	/// <summary>
+	///		moves current transform based on keyboard inputs
+	/// </summary>
 	private void movement(){
 		//Gets forward movement based on user input
 		if (Input.GetKey (KeyCode.W)) {
@@ -124,7 +128,9 @@ public class CameraMovement : MonoBehaviour {
 		this.transform.localPosition = bound( (this.transform.forward * forwardSpeed + this.transform.right * sidewaysSpeed) * Time.deltaTime);
 	}
 
-	//Rotations based on mouse and keyboard inputs
+	/// <summary>
+	///		Rotates current transform based on mouse and keyboard inputs
+	/// </summary>
 	private void mouseLook(){
 		//Inital value
 		Quaternion rotation = Quaternion.identity;
