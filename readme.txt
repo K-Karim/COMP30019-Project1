@@ -7,8 +7,10 @@ Class is used to create a terrain as a mesh object with the Diamond-Square Algor
 3. LockMouse.cs
 
 4. PointLight.cs
+Adapted from Lab04 to allow for rotation. This deals with the sun's movement and light source
 
 5. PhongShader.shader
+Adapted from Lab04, added terrain height colouring. Blue for water, yellow for sand, green for grass, brown mountains, white for snow
 
 Generate terrain in Unity:
 - Create a new plane (or terrain) object 
