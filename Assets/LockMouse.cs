@@ -2,6 +2,8 @@
  * Graphics and Interaction (COMP30019) Project 1
  * Team: Karim Khairat, Duy (Daniel) Vu, and Brody Taylor
  * 
+ * Stops mouse from moving outside of play area and prevents rotation from being hindered by displays borders. 
+ * Can be unlocked using the 'esc' key and locked again by clicking on the screen.
  * Code adapted from https://docs.unity3d.com/ScriptReference/Cursor-lockState.html
  */
 
