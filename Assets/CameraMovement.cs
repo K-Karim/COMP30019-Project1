@@ -2,7 +2,11 @@
  * Graphics and Interaction (COMP30019) Project 1
  * Team: Karim Khairat, Duy (Daniel) Vu, and Brody Taylor
  * 
+<<<<<<< HEAD
  * Code Adapted from other sources: Workshop 2 solutions
+=======
+ * Class is used to control the view of camera as a flying object within restricted boundaries
+>>>>>>> master
  */
 
 using System.Collections;
